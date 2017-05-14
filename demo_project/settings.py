@@ -38,6 +38,10 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    # 3rd-party
+    'pipeline',
+
+    # own
     'demo_project',
 )
 
@@ -108,3 +112,38 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
 
 STATIC_URL = '/static/'
+
+STATICFILES_STORAGE = 'pipeline.storage.PipelineCachedStorage'
+
+STATICFILES_FINDERS = (
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+    'pipeline.finders.PipelineFinder',
+)
+
+PIPELINE = {
+    'PIPELINE_ENABLED': True,
+    'STYLESHEETS': {
+        'base': {
+            'source_filenames': (
+                'site/stylus/base.styl',
+            ),
+            'output_filename': 'css/base.css',
+            # 'extra_context': {
+            #     'media': 'screen,projection',
+            # },
+        },
+    },
+    'JAVASCRIPT': {
+        'base': {
+            'source_filenames': (
+              'site/coffee/base.coffee',
+            ),
+            'output_filename': 'js/base.js',
+        }
+    },
+    'COMPILERS': (
+        'pipeline.compilers.coffee.CoffeeScriptCompiler',
+        'pipeline.compilers.stylus.StylusCompiler',
+    )
+}

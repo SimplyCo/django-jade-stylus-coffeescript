@@ -1,5 +1,5 @@
-# some errors with django 1.11.*
-Django==1.10.7
+Django==1.10.7  # some errors with django 1.11.*
 
-# errors when installed via package name
-git+https://github.com/syrusakbary/pyjade.git
+
+git+https://github.com/syrusakbary/pyjade.git  # errors when installed via package name
+django-pipeline==1.6.12
