@@ -1,1 +1,5 @@
-Django==1.11
+# some errors with django 1.11.*
+Django==1.10.7
+
+# errors when installed via package name
+git+https://github.com/syrusakbary/pyjade.git
